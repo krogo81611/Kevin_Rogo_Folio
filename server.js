@@ -1,10 +1,9 @@
 const express = require("express");
 const app = express();
-const cors = require('cors')
 
 const MongoClient = require("mongodb").MongoClient;
 
-
+const PORT = 2121;
 
 require("dotenv").config();
 
@@ -30,8 +29,6 @@ app.set("view engine", "ejs");
 
 app.use(express.static("public"));
 
-app.use(cors)
-
 app.use(express.urlencoded({ extended: true }));
 
 app.use(express.json());
@@ -39,7 +36,7 @@ app.use(express.json());
 app.use(express.static('public'))
 
 app.get('/', (req,res) => {
-    res.sendFile('index.html');
+    res.sendFile(__dirname + '/index.html');
 });
 
 
@@ -58,5 +55,5 @@ app.post("/contactMe", (request, response) => {
 
 
 app.listen(process.env.PORT || PORT, () => {
-  console.log(`Server running`);
+  console.log(`Server running on port ${PORT}`);
 });
